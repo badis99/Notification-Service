@@ -16,10 +16,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-transporter.verify()
-  .then(() => console.log("📧 Email server ready"))
-  .catch(err => console.error("❌ Email server error", err));
-
 export const sendEmail = async (notification) => {
     try {
         const { recipient, message } = notification;
