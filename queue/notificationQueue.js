@@ -1,18 +1,13 @@
-// jobId (string)
-// notification (your clean notification object)
-// status → "pending" | "processing" | "done" | "failed"
-// createdAt
-
-let jobs = [];
+export let jobs = [];
 
 export const createJob = (notification) => {
     const newJob = {
-        jobId : (jobs.length + 1).toString(),
-        notification : notification,
-        status : "pending",
-        createdAt : new Date().toISOString() 
-    }
+        jobId: `${jobs.length + 1}`,
+        notification,
+        status: "pending",
+        createdAt: new Date().toISOString()
+    };
     jobs.push(newJob);
-    console.log(`job ${newJob.jobId} queued`);
+    console.log(`Job ${newJob.jobId} queued`);
     return newJob;
-}
+};

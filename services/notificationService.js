@@ -1,23 +1,20 @@
-export const notifService = (obj) => {
-    if(obj.channel.toLowerCase() === "email"){
-        //emailService(obj);
-        return({status : "queued",
-            channel : "Email"
-        })
+import { sendEmail } from './emailService.js';
+
+
+export const notifService = async (notification) => {
+    switch(notification.channel) {
+        case "email":
+            return await sendEmail(notification);
+            break;
+        case "sms":
+            console.log(`Sending SMS to ${notification.recipient.phone}`);
+            break;
+        case "push":
+            console.log(`Sending push notification to ${notification.recipient.deviceId}`);
+            break;
+        default:
+            return { status: "failed" };
     }
-    else if(obj.channel.toLowerCase() === "sms"){
-        //smsService(obj);
-        return({status : "queued",
-            channel : "SMS"
-        })
-    }
-    else if(obj.channel.toLowerCase() === "push"){
-        //pushService(obj);
-        return({status : "queued",
-            channel : "Push"
-        })
-    }
-    else{
-        return ({status : "failed"});
-    }
-}
+
+    return { status: "queued" };
+};
